@@ -8,26 +8,13 @@ services:
     ports:
       - 5002:80
   chat-web-client:
-    build: ./angular-chat-app-client
+    build:
+      context: ./angular-chat-app-client
+      target: development
     volumes:
-      - ./src:/usr/chat-app/src/
-      - ./package.json:/urs/chat-app/package.json
-    container_name: chat-client
+      - ./angular-chat-app-client/src:/app/src
+    container_name: chat-web-client
     ports:
       - 4200:4200
-    command: npm start
-  # chat-postgres:
-  #   image: "postgres:latest"
-  #   container_name: chat-db
-  #   ports:
-  #     - 5432:5432
-  #   volumes:
-  #     - chat-app-data:/var/lib/postgresql/data
-  #   environment: 
-  #     - DB_SERVER=chat-app-postgres
-  #     - POSTGRES_DB=chat-app
-  #     - POSTGRES_USER=chat-app
-  #     - POSTGRES_PASSWORD=q1w2e3
-
-# volumes: 
-#   chat-app-data: 
+      - 49153:49153
+    command: ["npm", "start"]
