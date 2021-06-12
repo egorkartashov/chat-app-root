@@ -12,7 +12,7 @@ services:
       context: ./chat-app-angular-client
       target: development
     volumes:
-      - ./angular-chat-app-client/src:/app/src
+      - ./chat-app-angular-client/src:/app/src
     container_name: chat-web-client
     ports:
       - 4200:4200
