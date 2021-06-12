@@ -2,13 +2,13 @@ version: "3.9"
 services:
   chat-server:
     build:
-      context: ChatAppServer
+      context: chat-app-server
       dockerfile: ChatAppServer/Dockerfile
     container_name: chat-server
     ports:
       - 5002:80
   chat-web-client:
-    build: ./angular-chat-app-client
+    build: ./chat-app-angular-client
     volumes:
       - ./src:/usr/chat-app/src/
       - ./package.json:/urs/chat-app/package.json
