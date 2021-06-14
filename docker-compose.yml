@@ -7,19 +7,34 @@ services:
     container_name: chat-server
     ports:
       - 5002:80
-  chat-web-client:
-    build:
-      context: ./chat-app-angular-client
-      target: development
-    volumes:
-      - ./chat-app-angular-client/src:/app/src
-    container_name: chat-web-client
-    ports:
-      - 4200:4200
-      - 49153:49153
-    command: ["npm", "start"]
     depends_on: 
       - chat-postgres
+
+  # chat-angular-client:
+  #   build:
+  #     context: ./chat-app-angular-client
+  #     target: development
+  #   volumes:
+  #     - ./chat-app-angular-client/src:/app/src
+  #   container_name: chat-angular-client
+  #   ports:
+  #     - 4200:4200
+  #     - 49153:49153
+  #   command: ["npm", "start"]
+
+  chat-react-client:
+    build:
+      context: ./chat-react-client
+      target: development
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ./chat-react-client/src:/app/src
+    container_name: chat-react-client
+    ports:
+      - 3000:3000
+    command: ["npm", "start"]
+      
   chat-postgres:
     container_name: chat-postgres
     image: postgres
